@@ -45,6 +45,8 @@ typedef void (*opcode_func)(stack_t **stack, unsigned int num);
 void push_func(stack_t **list, int value, unsigned int line_num);
 void pall_func(stack_t **list, unsigned int line_num);
 void pint_func(stack_t **list, unsigned int line_num);
+void pop_func(stack_t **list, unsigned int line_num);
+void swap_func(stack_t **list, unsigned int line_num);
 
 /* main functions */
 void read_file(char *file);

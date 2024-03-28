@@ -12,8 +12,8 @@ void parse_command(char *buff, int line_num)
 	char *op_func, *op_arg;
 	instruction_t functions[] = {
 		{"push", NULL},
-		{"pall", pall_func},
-		{"pint", pint_func},
+		{"pall", pall_func}, {"pint", pint_func},
+		{"pop", pop_func}, {"swap", swap_func},
 		{NULL, NULL}
 	};
 

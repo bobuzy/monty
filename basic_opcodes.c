@@ -72,3 +72,54 @@ void pint_func(stack_t **list, unsigned int line_num)
 
 	printf("%d\n", (*list)->n);
 }
+
+/**
+ * pop_func - removes the top element of the stack
+ * @list: list
+ * @line_num: line number
+ *
+*/
+void pop_func(stack_t **list, unsigned int line_num)
+{
+	stack_t *tmp;
+
+	if (!list || !(*list))
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = *list;
+	*list = (*list)->next;
+	free(tmp);
+}
+
+/**
+ * swap_func - swaps the top two elements of the stack
+ * @list: list
+ * @line_num: line number
+ *
+*/
+void swap_func(stack_t **list, unsigned int line_num)
+{
+	stack_t *tmp;
+
+	if (!list || !(*list) || !(*list)->next)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = (*list)->next;
+	(*list)->next = tmp->next;
+
+	if (tmp->next)
+	{
+		tmp->next->prev = *list;
+	}
+
+	tmp->prev = NULL;
+	tmp->next = *list;
+	(*list)->prev = tmp;
+	*list = tmp;
+}
