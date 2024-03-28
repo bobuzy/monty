@@ -1,6 +1,13 @@
 #include "monty.h"
 stack_t *h = NULL;
 
+/**
+ * main - entry point
+ * @ac: number of arguments
+ * @av: arguments
+ *
+ * Return: 0 on success
+*/
 int main(int ac, char *av[])
 {
 	if (ac != 2)
@@ -13,6 +20,13 @@ int main(int ac, char *av[])
 	return (0);
 }
 
+/**
+ * find_func - finds the function to execute
+ * @op_func: opcode
+ * @op_arg: argument
+ * @line_num: line number
+ *
+*/
 void find_func(char *op_func, char *op_arg, int line_num)
 {
 	int n, value;
@@ -59,6 +73,13 @@ void find_func(char *op_func, char *op_arg, int line_num)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * push_func - pushes an element to the stack
+ * @list: list
+ * @value: value to push
+ * @line_num: line number
+ *
+*/
 void push_func(stack_t **list, int value, unsigned int line_num)
 {
 	stack_t *new = malloc(sizeof(stack_t));
@@ -69,8 +90,6 @@ void push_func(stack_t **list, int value, unsigned int line_num)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
-
 
 	new->n = value;
 	new->next = *list;
@@ -84,6 +103,12 @@ void push_func(stack_t **list, int value, unsigned int line_num)
 	*list = new;
 }
 
+/**
+ * pall_func - prints all the values on the stack
+ * @list: list
+ * @line_num: line number
+ *
+*/
 void pall_func(stack_t **list, unsigned int line_num)
 {
 	stack_t *ptr;
