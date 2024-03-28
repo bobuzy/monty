@@ -46,5 +46,6 @@ void parse_command(char *buff, int num);
 void find_func(char *op_func, char *op_arg, int line_num);
 void push_func(stack_t **list, int value, unsigned int line_num);
 void pall_func(stack_t **list, unsigned int line_num);
+void free_stack(stack_t *head);
 
 #endif
