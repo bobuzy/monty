@@ -54,6 +54,7 @@ void read_file(char *file)
 		buff_len = 0;
 		line_num++;
 	}
+	free(buff); /* free the last buffer (if it exists) */
 
 	fclose(fd);
 }
