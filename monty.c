@@ -62,13 +62,10 @@ void find_func(char *op_func, char *op_arg, int line_num)
 				push_func(&h, value, line_num);
 			}
 			else
-			{
 				functions[n].f(&h, line_num);
-			}
 			return;
 		}
 	}
-
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, op_func);
 	exit(EXIT_FAILURE);
 }
