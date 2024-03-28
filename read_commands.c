@@ -1,5 +1,11 @@
 #include "monty.h"
 
+/**
+ * parse_command - parses a command
+ * @buff: buffer
+ * @line_num: line number
+ * Return: void
+*/
 void parse_command(char *buff, int line_num)
 {
 	const char *delim = "\n ";
@@ -17,6 +23,10 @@ void parse_command(char *buff, int line_num)
 	find_func(op_func, op_arg, line_num);
 }
 
+/**
+ * read_file - reads a file and parses the commands
+ * @file: file to read
+*/
 void read_file(char *file)
 {
 	int line_num = 1;
