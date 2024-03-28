@@ -26,6 +26,7 @@ int main(int ac, char *av[])
  * @op_func: opcode
  * @op_arg: argument
  * @line_num: line number
+ * @functions: array of functions of opcodes
  *
 */
 void find_func(char *op_func, char *op_arg, int line_num,
