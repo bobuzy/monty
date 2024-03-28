@@ -13,57 +13,10 @@ int main(int ac, char *av[])
 	return (0);
 }
 
-void read_file(char *file)
-{
-	int line_num = 1;
-	char *buff = NULL;
-	size_t buff_len = 0;
-
-	FILE *fd = fopen(file, "r");
-
-	if (fd == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", file);
-		exit(EXIT_FAILURE);
-	}
-
-	while (getline(&buff, &buff_len, fd) != -1)
-	{
-		if (buff == NULL)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			exit(EXIT_FAILURE);
-		}
-		parse_command(buff, line_num);
-		free(buff);
-		buff = NULL;
-		buff_len = 0;
-		line_num++;
-	}
-
-	fclose(fd);
-}
-
-void parse_command(char *buff, int line_num)
-{
-	const char *delim = "\n ";
-	char *op_func, *op_arg;
-
-	op_func = strtok(buff, delim);
-
-	if (op_func == NULL)
-	{
-		return;
-	}
-
-	op_arg = strtok(NULL, delim);
-
-	find_func(op_func, op_arg, line_num);
-}
-
 void find_func(char *op_func, char *op_arg, int line_num)
 {
-	int n;
+	int n, value;
+	size_t i;
 
 	instruction_t functions[] = {
 		{"push", NULL},
@@ -75,9 +28,22 @@ void find_func(char *op_func, char *op_arg, int line_num)
 	{
 		if (strcmp(op_func, functions[n].opcode) == 0)
 		{
-			if (n == 0 && op_arg != NULL)
+			if (n == 0)
 			{
-				int value = atoi(op_arg);
+				if (op_arg == NULL)
+				{
+					fprintf(stderr, "L%d: usage: push integer\n", line_num);
+					exit(EXIT_FAILURE);
+				}
+				for (i = 0; i < strlen(op_arg); i++)
+				{
+					if (!isdigit(op_arg[i]))
+					{
+						fprintf(stderr, "L%d: invalid value for push\n", line_num);
+						exit(EXIT_FAILURE);
+					}
+				}
+				value = atoi(op_arg);
 
 				push_func(&h, value, line_num);
 			}
@@ -103,6 +69,8 @@ void push_func(stack_t **list, int value, unsigned int line_num)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+
+
 
 	new->n = value;
 	new->next = *list;
