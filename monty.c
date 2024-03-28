@@ -28,16 +28,11 @@ int main(int ac, char *av[])
  * @line_num: line number
  *
 */
-void find_func(char *op_func, char *op_arg, int line_num)
+void find_func(char *op_func, char *op_arg, int line_num,
+				instruction_t *functions)
 {
 	int n, value;
 	size_t i;
-
-	instruction_t functions[] = {
-		{"push", NULL},
-		{"pall", pall_func},
-		{NULL, NULL}
-	};
 
 	for (n = 0; functions[n].opcode != NULL; n++)
 	{

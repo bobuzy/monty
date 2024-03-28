@@ -10,6 +10,13 @@ void parse_command(char *buff, int line_num)
 {
 	const char *delim = "\n ";
 	char *op_func, *op_arg;
+	instruction_t functions[] = {
+		{"push", NULL},
+		{"pall", pall_func},
+		{"pint", pint_func},
+		{NULL, NULL}
+	};
+
 
 	op_func = strtok(buff, delim);
 
@@ -20,7 +27,7 @@ void parse_command(char *buff, int line_num)
 
 	op_arg = strtok(NULL, delim);
 
-	find_func(op_func, op_arg, line_num);
+	find_func(op_func, op_arg, line_num, functions);
 }
 
 /**

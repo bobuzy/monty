@@ -49,8 +49,8 @@ void pint_func(stack_t **list, unsigned int line_num);
 /* main functions */
 void read_file(char *file);
 void parse_command(char *buff, int num);
-void find_func(char *op_func, char *op_arg, int line_num);
-
+void find_func(char *op_func, char *op_arg, int line_num,
+				instruction_t *functions);
 /* helper functions */
 void free_stack(stack_t *head);
 
