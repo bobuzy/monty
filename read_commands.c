@@ -15,6 +15,8 @@ void parse_command(char *buff, int line_num)
 		{"pall", pall_func}, {"pint", pint_func},
 		{"pop", pop_func}, {"swap", swap_func},
 		{"nop", nop_func}, {"add", add_func},
+		{"sub", sub_func}, {"div", div_func},
+		{"mul", mul_func}, {"mod", mod_func},
 		{NULL, NULL}
 	};
 
