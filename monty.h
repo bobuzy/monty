@@ -41,11 +41,17 @@ typedef struct instruction_s
 extern stack_t *h;
 typedef void (*opcode_func)(stack_t **stack, unsigned int num);
 
+/* opcodes' functions */
+void push_func(stack_t **list, int value, unsigned int line_num);
+void pall_func(stack_t **list, unsigned int line_num);
+void pint_func(stack_t **list, unsigned int line_num);
+
+/* main functions */
 void read_file(char *file);
 void parse_command(char *buff, int num);
 void find_func(char *op_func, char *op_arg, int line_num);
-void push_func(stack_t **list, int value, unsigned int line_num);
-void pall_func(stack_t **list, unsigned int line_num);
+
+/* helper functions */
 void free_stack(stack_t *head);
 
 #endif
