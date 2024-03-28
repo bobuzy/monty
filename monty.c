@@ -17,6 +17,7 @@ int main(int ac, char *av[])
 	}
 
 	read_file(av[1]);
+	free_stack(h);
 	return (0);
 }
 
@@ -58,11 +59,11 @@ void find_func(char *op_func, char *op_arg, int line_num)
 					}
 				}
 				value = atoi(op_arg);
-
 				push_func(&h, value, line_num);
 			}
 			else
 				functions[n].f(&h, line_num);
+
 			return;
 		}
 	}
@@ -123,5 +124,24 @@ void pall_func(stack_t **list, unsigned int line_num)
 	{
 		printf("%d\n", ptr->n);
 		ptr = ptr->next;
+	}
+}
+
+/**
+ * free_stack - function that frees a dlistint_t list
+ *
+ * @head: pointer to head
+ *
+ * Return: void
+ */
+void free_stack(stack_t *head)
+{
+	stack_t *tmp;
+
+	while (head != NULL)
+	{
+		tmp = head->next;
+		free(head);
+		head = tmp;
 	}
 }
