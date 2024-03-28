@@ -23,10 +23,9 @@ void parse_command(char *buff, int line_num)
 
 	op_func = strtok(buff, delim);
 
-	if (op_func == NULL)
-	{
+	if (op_func == NULL || op_func[0] == '#') /* handle comments too */
 		return;
-	}
+
 
 	op_arg = strtok(NULL, delim);
 
