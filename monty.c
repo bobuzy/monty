@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 stack_t *h = NULL;
 
 int main(int ac, char *av[])
