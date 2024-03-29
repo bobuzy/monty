@@ -18,7 +18,7 @@ void parse_command(char *buff, int line_num)
 		{"sub", sub_func}, {"div", div_func},
 		{"mul", mul_func}, {"mod", mod_func},
 		{"pchar", pchar_func}, {"pstr", pstr_func},
-		{"rotl", rotl_func}, ("rotr", rotr_func),
+		{"rotl", rotl_func}, {"rotr", rotr_func},
 		{NULL, NULL}
 	};
 
