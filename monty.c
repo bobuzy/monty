@@ -1,6 +1,13 @@
 #include "monty.h"
 stack_t *h = NULL;
 
+/**
+ * main - entry point
+ * @ac: number of arguments
+ * @av: arguments
+ *
+ * Return: 0 on success
+*/
 int main(int ac, char *av[])
 {
 	if (ac != 2)
@@ -10,19 +17,23 @@ int main(int ac, char *av[])
 	}
 
 	read_file(av[1]);
+	free_stack(h);
 	return (0);
 }
 
-void find_func(char *op_func, char *op_arg, int line_num)
+/**
+ * find_func - finds the function to execute
+ * @op_func: opcode
+ * @op_arg: argument
+ * @line_num: line number
+ * @functions: array of functions of opcodes
+ *
+*/
+void find_func(char *op_func, char *op_arg, int line_num,
+				instruction_t *functions)
 {
 	int n, value;
 	size_t i;
-
-	instruction_t functions[] = {
-		{"push", NULL},
-		{"pall", pall_func},
-		{NULL, NULL}
-	};
 
 	for (n = 0; functions[n].opcode != NULL; n++)
 	{
@@ -44,62 +55,33 @@ void find_func(char *op_func, char *op_arg, int line_num)
 					}
 				}
 				value = atoi(op_arg);
-
 				push_func(&h, value, line_num);
 			}
 			else
-			{
 				functions[n].f(&h, line_num);
-			}
+
 			return;
 		}
 	}
-
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_num, op_func);
 	exit(EXIT_FAILURE);
 }
 
-void push_func(stack_t **list, int value, unsigned int line_num)
+/**
+ * free_stack - function that frees a dlistint_t list
+ *
+ * @head: pointer to head
+ *
+ * Return: void
+ */
+void free_stack(stack_t *head)
 {
-	stack_t *new = malloc(sizeof(stack_t));
-	(void)line_num;
+	stack_t *tmp;
 
-	if (new == NULL)
+	while (head != NULL)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-
-
-	new->n = value;
-	new->next = *list;
-	new->prev = NULL;
-
-	if (*list != NULL)
-	{
-		(*list)->prev = new;
-	}
-
-	*list = new;
-}
-
-void pall_func(stack_t **list, unsigned int line_num)
-{
-	stack_t *ptr;
-
-	(void)line_num;
-
-	if (list == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-
-	ptr = *list;
-
-	while (ptr != NULL)
-	{
-		printf("%d\n", ptr->n);
-		ptr = ptr->next;
+		tmp = head->next;
+		free(head);
+		head = tmp;
 	}
 }
