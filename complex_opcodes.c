@@ -43,3 +43,70 @@ void pstr_func(stack_t **list, unsigned int line_num)
 
 	printf("\n");
 }
+
+
+/**
+ * rotl_func - move the first node to last
+ * @list: head of the list
+ * @line_num: Current line number
+ *
+ * Return: nothing
+ */
+void rotl_func(stack_t **list, unsigned int line_num)
+{
+	stact_t *new, *ptr;
+
+	if (*list == NULL || (*list)->next == NULL)
+	{
+		return;
+	}
+
+	new = *list;
+	*list = (*list)->next;
+	(*list)->prev = NULL;
+	new->next = NULL;
+	new->prev = NULL;
+
+	ptr = *list;
+
+	while (ptr->next != NULL)
+	{
+		ptr = ptr->next;
+	}
+
+	ptr->next = new;
+	new->prev = ptr;
+}
+
+
+/**
+ * rotr_func - move the last element to the top of the list
+ * @list: head of the list
+ * @line_num: the current line number
+ *
+ * Return: nothing
+ */
+void rotr_func(stack_t **list, unsigned int line_num)
+{
+	stact_t *new, *ptr;
+
+	if (*list == NULL || (*list)->next == NULL)
+	{
+		return;
+	}
+
+	new = *list;
+
+	while (new->next != NULL)
+	{
+		new = new->next;
+	}
+
+	ptr = new->prev;
+	ptr->next = NULL;
+	new->prev = NULL;
+
+	new->next = *list;
+	(*list)->prev = new;
+	*list = new;
+}
