@@ -54,8 +54,9 @@ void pstr_func(stack_t **list, unsigned int line_num)
  */
 void rotl_func(stack_t **list, unsigned int line_num)
 {
-	stact_t *new, *ptr;
+	stack_t *new, *ptr;
 
+	(void)line_num;
 	if (*list == NULL || (*list)->next == NULL)
 	{
 		return;
@@ -88,7 +89,9 @@ void rotl_func(stack_t **list, unsigned int line_num)
  */
 void rotr_func(stack_t **list, unsigned int line_num)
 {
-	stact_t *new, *ptr;
+	stack_t *new, *ptr;
+
+	(void)line_num;
 
 	if (*list == NULL || (*list)->next == NULL)
 	{
