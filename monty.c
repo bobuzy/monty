@@ -50,7 +50,7 @@ void find_func(char *op_func, char *op_arg, int line_num,
 				{
 					if (!isdigit(op_arg[i]))
 					{
-						fprintf(stderr, "L%d: usage print integer\n", line_num);
+						fprintf(stderr, "L%d: usage: push integer\n", line_num);
 						exit(EXIT_FAILURE);
 					}
 				}
